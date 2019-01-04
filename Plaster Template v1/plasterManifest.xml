@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<plasterManifest
+  schemaVersion="1.1"
+  templateType="Project" xmlns="http://www.microsoft.com/schemas/PowerShell/Plaster/v1">
+  <metadata>
+    <name>KHNewPSModule</name>
+    <id>4a5bb16e-0f69-44c2-a1b5-261dbd38f413</id>
+    <version>1.0.0</version>
+    <title>KH New PowerShell Module</title>
+    <description>My custom settings for new PowerShell Module creation</description>
+    <author>Ken Henderson</author>
+    <tags></tags>
+  </metadata>
+  <parameters>
+    <parameter name="ModuleName" type='text' prompt="Enter a name for the new module" />
+    <parameter name="ModuleDescription" type='text' prompt="Enter a description for the new module" />
+    <parameter name='ModuleVersion' type='text' default='0.0.1' prompt='Enter the version number for the module'/>
+    <parameter name="ModuleAuthor" type="user-fullname" prompt="Author" />
+    <parameter name="ModuleAuthorEmail" type="user-email" prompt="Author's email" />
+    <parameter name="ModuleRepo" type = "text" prompt="GitHub Repo name for this module" default="${PLASTER_PARAM_ModuleName}" />
+  </parameters>
+  <content>
+    <message>
+      + + + Creating folder structure + + +
+    </message>
+    <file source='' destination='${PLASTER_PARAM_ModuleName}\public'/>
+    <file source='' destination='${PLASTER_PARAM_ModuleName}\private'/>
+    <file source='' destination='tests\'/>
+    <file source='' destination='docs\'/>
+    <message>
+    + + + Creating default files + + +
+    </message>
+    <file source='module\Module.psm1' destination='${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psm1'/>
+    <file source='README.md' destination=''/>
+    <file source='AppVeyor.yaml' destination=''/>
+    <templateFile source='MITLicense.md' destination=''/>
+    <templateFile source='docs\about.md' destination=''/>
+    <file source='docs\acknowledgements.md' destination=''/>
+    <file source='docs\index.md' destination=''/>
+    <file source='docs\Quick-Start-Installation-and-Example.md' destination=''/>
+    <templateFile source='tests\Feature.Tests.ps1' destination=''/>
+    <templateFile source='tests\Help.Tests.ps1' destination=''/>
+    <templateFile source='tests\Project.Tests.ps1' destination=''/>
+    <templateFile source='tests\Unit.Tests.ps1' destination=''/>
+    <file source='tests\Regression.Tests.ps1' destination=''/>
+    <message>
+      + + + Creating ${PLASTER_PARAM_ModuleName} Module Manifest + + +
+    </message>
+    <newModuleManifest 
+        destination='${PLASTER_PARAM_ModuleName}\${PLASTER_PARAM_ModuleName}.psd1'
+        moduleVersion='${PLASTER_PARAM_ModuleVersion}'
+        rootModule='${PLASTER_PARAM_ModuleName}'
+        author='${PLASTER_PARAM_ModuleAuthor}'
+        description= '${PLASTER_PARAM_ModuleDescription}'
+        encoding='UTF8-NoBOM'
+    />
+  </content>
+</plasterManifest>

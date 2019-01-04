@@ -1,2 +1,2 @@
 # PlasterTemplates
-Personal Plaster Templates for standard module creation
+My personal Plaster Templates 
